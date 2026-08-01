@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+
+<html lang="cs">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Sečem Trávu Brno — Profesionální péče o zahradu</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#2A5C35;
+  --green-mid:#3D7A4A;
+  --green-light:#E8F0E9;
+  --cream:#FAFAF7;
+  --white:#FFFFFF;
+  --charcoal:#1C1C1A;
+  --gray:#6B6B68;
+  --border:#E2E2DC;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Inter',system-ui,sans-serif;
+  --radius:0px;
+  --pad:clamp(20px,5vw,80px);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--cream);color:var(--charcoal);overflow-x:hidden;line-height:1.6}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:var(--green)}
+img{display:block;max-width:100%}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.6s cubic-bezier(.22,1,.36,1),transform 0.6s cubic-bezier(.22,1,.36,1)}
+.reveal.on{opacity:1;transform:none}
+.reveal-d1{transition-delay:.1s}
+.reveal-d2{transition-delay:.2s}
+.reveal-d3{transition-delay:.3s}
+.reveal-d4{transition-delay:.4s}
+/* PHOTO CARDS */
+.photo-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:4px;
+  overflow:hidden;
+  transition:transform .3s,box-shadow .3s;
+}
+.photo-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(42,92,53,.15)}
+.photo-card-img{
+  height:220px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  transition:transform .4s;
+}
+.photo-card:hover .photo-card-img{transform:scale(1.03)}
+.photo-card-img span{
+  font-size:3.5rem;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.3));
+  position:relative;z-index:1;
+}
+.photo-card-img::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.2),transparent);
+}
+.photo-card-body{padding:24px 24px 28px}
+.photo-card-title{
+  font-family:var(--serif);font-size:1.2rem;font-weight:700;
+  color:var(--green);margin-bottom:8px;letter-spacing:-.01em;
+}
+.photo-card-desc{font-size:.875rem;color:var(--gray);line-height:1.65}
+
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--pad);height:72px;
+  background:rgba(250,250,247,0.95);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid transparent;
+  transition:border-color .3s,box-shadow .3s;
+}
+nav.scrolled{border-color:var(--border);box-shadow:0 2px 20px rgba(0,0,0,.06)}
+.nav-logo{
+  font-family:var(--serif);font-size:1.3rem;font-weight:700;
+  color:var(--charcoal);text-decoration:none;letter-spacing:-.01em;
+}
+.nav-logo span{color:var(--green)}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{
+  font-size:.82rem;font-weight:500;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--gray);
+  text-decoration:none;transition:color .2s;
+}
+.nav-links a:hover{color:var(--green)}
+.nav-btn{
+  background:var(--green);color:#fff;
+  padding:11px 24px;
+  font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;border-radius:2px;
+  transition:background .2s,transform .2s;
+  white-space:nowrap;
+}
+.nav-btn:hover{background:var(--green-mid);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--charcoal);border-radius:2px;transition:all .3s}
+.mobile-menu{
+  display:none;position:fixed;inset:72px 0 0 0;
+  background:var(--cream);z-index:199;
+  flex-direction:column;align-items:center;justify-content:center;gap:32px;
+}
+.mobile-menu.open{display:flex}
+.mobile-menu a{
+  font-family:var(--serif);font-size:2rem;font-weight:700;
+  color:var(--charcoal);text-decoration:none;
+}
+.mobile-menu a:hover{color:var(--green)}
+
+/* HERO */
+#hero{
+  position:relative;height:100vh;min-height:600px;
+  display:flex;align-items:flex-end;
+  overflow:hidden;
+}
+.hero-img{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,.15) 0%, rgba(0,0,0,.55) 100%),
+    url("images/1.jpeg") center/cover no-repeat;
+}
+.hero-content{
+  position:relative;z-index:2;
+  padding:0 var(--pad) 80px;
+  max-width:900px;
+}
+.hero-tag{
+  display:inline-block;
+  background:rgba(255,255,255,.15);
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.25);
+  color:#fff;
+  font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  padding:7px 16px;border-radius:2px;margin-bottom:24px;
+  opacity:0;animation:fadeUp .6s 1.2s cubic-bezier(.22,1,.36,1) forwards;
+}
+.hero-h1{
+  font-family:var(--serif);
+  font-size:clamp(3rem,7vw,6.5rem);
+  font-weight:900;line-height:.95;
+  letter-spacing:-.03em;color:#fff;
+  margin-bottom:28px;
+  opacity:0;animation:fadeUp .65s 1.35s cubic-bezier(.22,1,.36,1) forwards;
+}
+.hero-h1 em{font-style:italic;color:rgba(255,255,255,.75)}
+.hero-sub{
+  font-size:1.05rem;font-weight:300;color:rgba(255,255,255,.8);
+  max-width:480px;line-height:1.7;margin-bottom:36px;
+  opacity:0;animation:fadeUp .65s 1.5s cubic-bezier(.22,1,.36,1) forwards;
+}
+.hero-actions{
+  display:flex;gap:14px;flex-wrap:wrap;
+  opacity:0;animation:fadeUp .65s 1.65s cubic-bezier(.22,1,.36,1) forwards;
+}
+.btn-white{
+  background:#fff;color:var(--green);
+  padding:15px 32px;border-radius:2px;
+  font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;transition:all .2s;
+}
+.btn-white:hover{background:var(--green-light);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.2)}
+.btn-outline-white{
+  border:1.5px solid rgba(255,255,255,.5);color:#fff;
+  padding:15px 32px;border-radius:2px;
+  font-size:.82rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;transition:all .2s;
+}
+.btn-outline-white:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+.hero-scroll{
+  position:absolute;bottom:32px;right:var(--pad);
+  display:flex;align-items:center;gap:8px;
+  color:rgba(255,255,255,.5);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+  opacity:0;animation:fadeUp .6s 2s cubic-bezier(.22,1,.36,1) forwards;
+}
+.scroll-line{
+  width:40px;height:1px;background:rgba(255,255,255,.3);
+  position:relative;overflow:hidden;
+}
+.scroll-line::after{
+  content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:rgba(255,255,255,.6);
+  animation:scrollLine 2s 2.5s ease-in-out infinite;
+}
+@keyframes scrollLine{to{left:200%}}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+
+/* STATS BAR */
+.stats-bar{
+  background:var(--green);
+  display:grid;grid-template-columns:repeat(3,1fr);
+}
+.stat{
+  padding:36px var(--pad);
+  border-right:1px solid rgba(255,255,255,.12);
+  text-align:center;
+}
+.stat:last-child{border-right:none}
+.stat-num{
+  font-family:var(--serif);font-size:2.8rem;font-weight:900;
+  color:#fff;line-height:1;letter-spacing:-.04em;
+}
+.stat-label{font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:6px}
+
+/* ABOUT */
+#o-nas{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:600px;
+}
+.about-img{
+  background:
+    linear-gradient(135deg, #2A5C35 0%, #3D7A4A 40%, #5A9E65 70%, #7AB87F 100%);
+  display:flex;align-items:flex-end;justify-content:flex-start;padding:48px;
+  min-height:500px;
+}
+.about-text{
+  padding:80px clamp(32px,5vw,80px);
+  display:flex;flex-direction:column;justify-content:center;
+  background:var(--white);
+}
+.section-label{
+  font-size:.72rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--green);margin-bottom:16px;
+  display:flex;align-items:center;gap:10px;
+}
+.section-label::before{content:'';display:block;width:28px;height:1.5px;background:var(--green)}
+.about-h{
+  font-family:var(--serif);
+  font-size:clamp(2rem,3.5vw,3rem);font-weight:700;
+  line-height:1.1;letter-spacing:-.02em;
+  color:var(--charcoal);margin-bottom:20px;
+}
+.about-h em{font-style:italic;color:var(--green)}
+.about-p{font-size:.97rem;color:var(--gray);line-height:1.75;margin-bottom:16px}
+.about-checks{display:flex;flex-direction:column;gap:10px;margin-top:28px}
+.check-item{display:flex;gap:12px;align-items:flex-start;font-size:.9rem;color:var(--charcoal)}
+.check-icon{
+  width:22px;height:22px;border-radius:50%;
+  background:var(--green-light);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;flex-shrink:0;color:var(--green);margin-top:1px;
+}
+
+/* SERVICES */
+#sluzby{padding:100px var(--pad);background:var(--cream)}
+.sluzby-header{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:60px;align-items:end;margin-bottom:64px;
+}
+.sluzby-h{
+  font-family:var(--serif);
+  font-size:clamp(2.2rem,4vw,3.4rem);font-weight:700;
+  line-height:1.05;letter-spacing:-.02em;
+  color:var(--charcoal);
+}
+.sluzby-h em{font-style:italic;color:var(--green)}
+.sluzby-sub{font-size:.97rem;color:var(--gray);line-height:1.75;max-width:420px}
+.services-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:2px;background:var(--border);
+  border:1px solid var(--border);
+}
+.svc{
+  background:var(--white);
+  padding:44px 40px;
+  transition:background .3s;
+  position:relative;overflow:hidden;
+}
+.svc::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--green),var(--green-mid));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .35s cubic-bezier(.22,1,.36,1);
+}
+.svc:hover{background:var(--green-light)}
+.svc:hover::after{transform:scaleX(1)}
+.svc-num{font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--border);margin-bottom:20px}
+.svc-icon{font-size:2.2rem;margin-bottom:16px;display:block;line-height:1}
+.svc-name{
+  font-family:var(--serif);font-size:1.5rem;font-weight:700;
+  color:var(--charcoal);margin-bottom:10px;line-height:1.2;
+}
+.svc-desc{font-size:.875rem;color:var(--gray);line-height:1.65;margin-bottom:20px}
+.svc-link{
+  font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--green);text-decoration:none;
+  display:inline-flex;align-items:center;gap:6px;
+  border-bottom:1px solid var(--green);padding-bottom:2px;
+  transition:gap .2s;
+}
+.svc-link:hover{gap:10px}
+
+/* PRICING */
+#cenik{padding:100px var(--pad);background:var(--white)}
+.cenik-intro{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:60px;align-items:end;margin-bottom:64px;
+}
+.cenik-h{
+  font-family:var(--serif);
+  font-size:clamp(2.2rem,4vw,3.4rem);font-weight:700;
+  line-height:1.05;letter-spacing:-.02em;color:var(--charcoal);
+}
+.cenik-h em{font-style:italic;color:var(--green)}
+.cenik-sub{font-size:.97rem;color:var(--gray);line-height:1.75}
+.cenik-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.cenik-card{
+  border:1px solid var(--border);
+  border-radius:4px;overflow:hidden;
+}
+.cenik-card-head{
+  background:var(--green);
+  padding:28px 32px;
+  display:flex;align-items:center;gap:14px;
+}
+.cenik-card-head-icon{font-size:1.6rem}
+.cenik-card-head-title{
+  font-family:var(--serif);font-size:1.3rem;font-weight:700;
+  color:#fff;
+}
+.cenik-body{padding:0 32px 28px}
+.cenik-row{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  gap:16px;padding:16px 0;
+  border-bottom:1px solid var(--border);
+}
+.cenik-row:last-child{border-bottom:none}
+.cenik-row-name{flex:1}
+.cenik-row-name strong{display:block;font-size:.9rem;font-weight:600;color:var(--charcoal);margin-bottom:3px}
+.cenik-row-name small{font-size:.78rem;color:var(--gray)}
+.cenik-row-price{
+  font-size:.88rem;font-weight:700;color:var(--green);
+  white-space:nowrap;text-align:right;flex-shrink:0;padding-top:2px;
+}
+.cenik-note{
+  margin:20px 32px 28px;padding:14px 16px;
+  background:var(--green-light);border-radius:2px;
+  font-size:.8rem;color:var(--green);line-height:1.5;
+}
+.cenik-note strong{font-weight:600}
+
+/* PROCESS */
+#proces{padding:100px var(--pad);background:var(--charcoal)}
+.proces-label{color:rgba(255,255,255,.4)}
+.proces-label::before{background:rgba(255,255,255,.3)}
+.proces-h{
+  font-family:var(--serif);
+  font-size:clamp(2.2rem,4vw,3.4rem);font-weight:700;
+  line-height:1.05;letter-spacing:-.02em;
+  color:#fff;margin-bottom:64px;
+}
+.proces-h em{font-style:italic;color:rgba(255,255,255,.5)}
+.proces-steps{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;border-top:1px solid rgba(255,255,255,.1);
+}
+.proc-step{
+  padding:40px 28px 40px 0;
+  border-right:1px solid rgba(255,255,255,.08);
+}
+.proc-step:last-child{border-right:none}
+.proc-num{
+  font-family:var(--serif);font-size:3.5rem;font-weight:900;
+  color:rgba(255,255,255,.08);line-height:1;margin-bottom:20px;
+  letter-spacing:-.04em;
+}
+.proc-icon{font-size:1.5rem;margin-bottom:14px;display:block}
+.proc-h{font-size:.97rem;font-weight:600;color:#fff;margin-bottom:8px}
+.proc-p{font-size:.85rem;color:rgba(255,255,255,.45);line-height:1.65}
+
+/* CONTACT */
+#kontakt{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:700px;
+}
+.kontakt-img{
+  background:linear-gradient(135deg, #1a3a20 0%, #2A5C35 60%, #3D7A4A 100%);
+  position:relative;
+}
+.kontakt-img-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(42,92,53,.8),rgba(0,0,0,.4));
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:48px;
+}
+.k-tag{
+  font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.6);margin-bottom:16px;
+}
+.k-quote{
+  font-family:var(--serif);font-size:1.8rem;font-weight:700;
+  color:#fff;line-height:1.2;letter-spacing:-.02em;
+  margin-bottom:32px;
+}
+.k-quote em{font-style:italic;color:rgba(255,255,255,.65)}
+.k-contacts{display:flex;flex-direction:column;gap:14px}
+.k-contact{
+  display:flex;gap:12px;align-items:center;
+}
+.k-contact-icon{
+  width:36px;height:36px;border-radius:2px;
+  background:rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;flex-shrink:0;
+}
+.k-contact-val{font-size:.9rem;color:rgba(255,255,255,.8);font-weight:500}
+.kontakt-form{
+  background:var(--cream);
+  padding:72px clamp(28px,4vw,64px);
+  display:flex;flex-direction:column;justify-content:center;
+}
+.form-title{
+  font-family:var(--serif);font-size:1.6rem;font-weight:700;
+  color:var(--charcoal);margin-bottom:28px;letter-spacing:-.01em;
+}
+.fg{margin-bottom:16px}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+label{
+  display:block;font-size:.72rem;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--gray);margin-bottom:6px;
+}
+input,textarea,select{
+  width:100%;padding:12px 14px;
+  background:var(--white);border:1.5px solid var(--border);
+  border-radius:2px;font-family:var(--sans);font-size:.93rem;
+  color:var(--charcoal);outline:none;
+  transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;
+}
+input:focus,textarea:focus,select:focus{
+  border-color:var(--green);
+  box-shadow:0 0 0 3px rgba(42,92,53,.1);
+}
+input::placeholder,textarea::placeholder{color:#bbb}
+select option{background:var(--white);color:var(--charcoal)}
+textarea{resize:vertical;min-height:100px}
+.file-drop{
+  border:1.5px dashed var(--border);border-radius:2px;
+  padding:24px;text-align:center;
+  background:var(--white);cursor:pointer;position:relative;
+  transition:border-color .2s,background .2s;
+}
+.file-drop:hover{border-color:var(--green);background:var(--green-light)}
+.file-drop input{
+  position:absolute;inset:0;opacity:0;cursor:pointer;
+  width:100%;height:100%;border:none;padding:0;background:none;box-shadow:none;
+}
+.file-drop-text{font-size:.82rem;color:var(--gray)}
+.file-drop-text strong{color:var(--green)}
+#filenames{font-size:.75rem;color:var(--green);margin-top:6px;font-weight:600}
+.submit-btn{
+  width:100%;margin-top:8px;padding:15px;border:none;border-radius:2px;
+  background:var(--green);color:#fff;
+  font-family:var(--sans);font-size:.82rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  cursor:pointer;transition:background .2s,transform .2s;
+}
+.submit-btn:hover{background:var(--green-mid);transform:translateY(-1px)}
+.submit-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.form-note{text-align:center;margin-top:10px;font-size:.75rem;color:var(--gray)}
+.success-box{
+  display:none;background:var(--green-light);border:1.5px solid var(--green);
+  border-radius:2px;padding:20px;text-align:center;
+  color:var(--green);font-size:.93rem;line-height:1.6;margin-top:12px;
+}
+.success-box.show{display:block}
+
+/* FOOTER */
+footer{
+  background:var(--charcoal);
+  padding:56px var(--pad) 36px;
+}
+.footer-top{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  gap:40px;flex-wrap:wrap;
+  padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.08);
+  margin-bottom:28px;
+}
+.footer-logo{
+  font-family:var(--serif);font-size:1.3rem;font-weight:700;
+  color:#fff;margin-bottom:8px;
+}
+.footer-logo span{color:var(--green-mid)}
+.footer-tagline{font-size:.8rem;color:rgba(255,255,255,.4)}
+.footer-links{display:flex;gap:28px;flex-wrap:wrap;align-items:center}
+.footer-links a{
+  font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;
+}
+.footer-links a:hover{color:#fff}
+.footer-copy{font-size:.75rem;color:rgba(255,255,255,.25);letter-spacing:.02em}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  #o-nas{grid-template-columns:1fr}
+  .about-img{min-height:300px}
+  .sluzby-header,.cenik-intro{grid-template-columns:1fr;gap:24px}
+  .services-grid{grid-template-columns:1fr}
+  .cenik-grid{grid-template-columns:1fr}
+  .proces-steps{grid-template-columns:1fr 1fr}
+  .proc-step{border-right:none;border-bottom:1px solid rgba(255,255,255,.08);padding:32px 0}
+  #kontakt{grid-template-columns:1fr}
+  .kontakt-img{min-height:400px}
+  .stats-bar{grid-template-columns:1fr}
+  .stat{border-right:none;border-bottom:1px solid rgba(255,255,255,.12);padding:28px var(--pad)}
+  .stat:last-child{border-bottom:none}
+  #galerie .grid-3{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .hero-h1{font-size:clamp(2.4rem,10vw,3.5rem)}
+  .proces-steps{grid-template-columns:1fr}
+  .fg-row{grid-template-columns:1fr}
+  .footer-top{flex-direction:column;gap:24px}
+  #galerie .grid-3{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<!-- NAV -->
+<nav id="nav">
+<a class="nav-logo" href="#">Sečem <span>Trávu</span></a>
+<ul class="nav-links">
+<li><a href="#o-nas">O nás</a></li>
+<li><a href="#sluzby">Služby</a></li>
+<li><a href="#cenik">Ceník</a></li>
+<li><a href="#kontakt">Kontakt</a></li>
+</ul>
+<a class="nav-btn" href="#kontakt">Poptávka zdarma</a>
+<button aria-label="Menu" class="hamburger" id="hamburger">
+<span></span><span></span><span></span>
+</button>
+</nav>
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+<a href="#o-nas" onclick="closeMenu()">O nás</a>
+<a href="#sluzby" onclick="closeMenu()">Služby</a>
+<a href="#cenik" onclick="closeMenu()">Ceník</a>
+<a href="#kontakt" onclick="closeMenu()">Kontakt</a>
+<a class="nav-btn" href="#kontakt" onclick="closeMenu()">Poptávka zdarma</a>
+</div>
+<!-- HERO -->
+<section id="hero">
+<div aria-label="Krásně posečený trávník" class="hero-img" role="img"></div>
+<div class="hero-content">
+<div class="hero-tag">Brno a okolí · Profesionální zahradní služby</div>
+<h1 class="hero-h1">Zahrada,<br/>na kterou jste<br/><em>hrdí.</em></h1>
+<p class="hero-sub">Sekání trávy, zavlažování na míru, křovinořez a odvoz biomasy. Výjezd do 24 hodin — zavolejte dnes, jsme u vás zítra.</p>
+<div class="hero-actions">
+<a class="btn-white" href="#kontakt">Poptat sekání</a>
+<a class="btn-outline-white" href="#sluzby">Naše služby</a>
+</div>
+</div>
+<div class="hero-scroll">
+<div class="scroll-line"></div>
+    Rolovat dolů
+  </div>
+</section>
+<!-- STATS -->
+<div aria-label="Naše výsledky" class="stats-bar" role="region">
+<div class="stat reveal"><div class="stat-num">850+</div><div class="stat-label">Spokojených zákazníků</div></div>
+<div class="stat reveal reveal-d1"><div class="stat-num">24h</div><div class="stat-label">Výjezd do</div></div>
+<div class="stat reveal reveal-d2"><div class="stat-num">5+</div><div class="stat-label">Let zkušeností</div></div>
+</div>
+<!-- ABOUT -->
+<section id="o-nas">
+<div aria-label="Zahrada v Brně" class="about-img" role="img">
+<div style="position:relative;z-index:2">
+<div style="font-size:4rem;margin-bottom:16px">🌿</div>
+<div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:#fff;line-height:1.2;letter-spacing:-.02em">Každá zahrada<br/>si zaslouží<br/><em style="font-style:italic;color:rgba(255,255,255,.7)">péči</em></div>
+</div>
+<div style="position:absolute;inset:0;background-image:radial-gradient(circle at 20% 80%,rgba(255,255,255,.05) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(255,255,255,.08) 0%,transparent 40%);pointer-events:none"></div>
+</div>
+<div class="about-text">
+<p class="section-label reveal">O nás</p>
+<h2 class="about-h reveal reveal-d1">Zahradníci z <em>Brna,</em><br/>kteří to myslí vážně</h2>
+<p class="about-p reveal reveal-d2">Jsme brněnská parta zahradníků s více než pětiletými zkušenostmi. Nebereme to jako brigádu — bereme to jako řemeslo. Každá zahrada si zaslouží pečlivou práci.</p>
+<p class="about-p reveal reveal-d3">Pracujeme v Brně a okolí do 30 km. Objednávky přijímáme 7 dní v týdnu, výjezd zajišťujeme do 24 hodin.</p>
+<div class="about-checks reveal reveal-d4">
+<div class="check-item"><div class="check-icon">✓</div>Vlastní profesionální technika</div>
+<div class="check-item"><div class="check-icon">✓</div>Platíte až po dokončení práce</div>
+<div class="check-item"><div class="check-icon">✓</div>Nemusíte být doma</div>
+<div class="check-item"><div class="check-icon">✓</div>Bezplatná cenová nabídka</div>
+</div>
+</div>
+</section>
+<!-- SERVICES -->
+<section id="sluzby">
+<div class="sluzby-header">
+<div>
+<p class="section-label reveal">Služby</p>
+<h2 class="sluzby-h reveal reveal-d1">Vše co vaše<br/>zahrada <em>potřebuje</em></h2>
+</div>
+<p class="sluzby-sub reveal reveal-d2">Od pravidelného sekání přes automatické zavlažování až po odvoz biomasy. Kompletní péče o zahradu na jednom místě.</p>
+</div>
+<div class="services-grid">
+<div class="svc reveal">
+<div class="svc-num">01</div>
+<span class="svc-icon">🌾</span>
+<div class="svc-name">Sekání trávy</div>
+<p class="svc-desc">Pravidelné sekání travního porostu profesionální technikou. Výsledek čistý, rovnoměrný, okraje upravené.</p>
+<a class="svc-link" href="#kontakt">Poptat →</a>
+</div>
+<div class="svc reveal reveal-d1">
+<div class="svc-num">02</div>
+<span class="svc-icon">💧</span>
+<div class="svc-name">Zavlažování na míru</div>
+<p class="svc-desc">Návrh a instalace automatického závlahového systému. Trávník zelený i v létě — bez vaší námahy.</p>
+<a class="svc-link" href="#kontakt">Poptat →</a>
+</div>
+<div class="svc reveal reveal-d2">
+<div class="svc-num">03</div>
+<span class="svc-icon">✂️</span>
+<div class="svc-name">Sekání křovinořezem</div>
+<p class="svc-desc">Svahy, příkopy, obtížný terén a místa kde sekačka nedojede. Křovinořez zvládne vše.</p>
+<a class="svc-link" href="#kontakt">Poptat →</a>
+</div>
+<div class="svc reveal reveal-d3">
+<div class="svc-num">04</div>
+<span class="svc-icon">🍃</span>
+<div class="svc-name">Odvoz trávy a biomasy</div>
+<p class="svc-desc">Tráva, listí, větve — vše odvezeme a ekologicky zlikvidujeme. Zahrada čistá hned po nás.</p>
+<a class="svc-link" href="#kontakt">Poptat →</a>
+</div>
+</div>
+</section>
+<!-- PHOTO GRID -->
+<section id="galerie" style="padding:100px var(--pad);background:var(--cream)">
+<div style="text-align:center;margin-bottom:64px">
+<p class="section-label reveal" style="justify-content:center;margin-bottom:12px">
+<span style="display:none">—</span>Co děláme
+    </p>
+<h2 class="reveal" style="font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,3.4rem);font-weight:700;line-height:1.05;letter-spacing:-.02em;color:var(--charcoal)">Naše <em style="font-style:italic;color:var(--green)">služby</em> v praxi</h2>
+</div>
+<div class="grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px">
+<!-- 1 -->
+<div class="photo-card reveal">
+<div class="photo-card-img"><img alt="Sekání trávy" src="images/5.jpg" style="width:100%;height:100%;object-fit:cover;"/></div>
+<div class="photo-card-body">
+<div class="photo-card-title">Sekání trávy</div>
+<p class="photo-card-desc">Pravidelné sekání travního porostu profesionální technikou. Výsledek vždy čistý a rovnoměrný.</p>
+</div>
+</div>
+<!-- 2 -->
+<div class="photo-card reveal reveal-d1">
+<div class="photo-card-img"><img alt="Úprava okrajů" src="images/6.jpg" style="width:100%;height:100%;object-fit:cover;"/></div>
+<div class="photo-card-body">
+<div class="photo-card-title">Úprava okrajů</div>
+<p class="photo-card-desc">Precizní úprava okrajů trávníku podél chodníků, záhonů a obrubníků. Detail, který změní vše.</p>
+</div>
+</div>
+<!-- 3 -->
+<div class="photo-card reveal reveal-d2">
+<div class="photo-card-img"><img alt="Zavlažování" src="images/3.jpeg" style="width:100%;height:100%;object-fit:cover;"/></div>
+<div class="photo-card-body">
+<div class="photo-card-title">Zavlažování na míru</div>
+<p class="photo-card-desc">Návrh a instalace automatického závlahového systému. Trávník zelený celé léto bez vaší námahy.</p>
+</div>
+</div>
+<!-- 4 -->
+<div class="photo-card reveal reveal-d1">
+<div class="photo-card-img"><img alt="Odvoz biomasy" src="images/4.jpeg" style="width:100%;height:100%;object-fit:cover;"/></div>
+<div class="photo-card-body">
+<div class="photo-card-title">Hrabání listí</div>
+<p class="photo-card-desc">Podzimní úklid zahrady — hrabání listí, sběr a odvoz. Zahrada připravená na zimu.</p>
+</div>
+</div>
+<!-- 5 -->
+<div class="photo-card reveal reveal-d2">
+<div class="photo-card-img"><img alt="Údržba zahrady" src="images/1.jpeg" style="width:100%;height:100%;object-fit:cover;"/></div>
+<div class="photo-card-body">
+<div class="photo-card-title">Sekání křovinořezem</div>
+<p class="photo-card-desc">Svahy, příkopy a obtížný terén kde sekačka nedojede. Křovinořez zvládne vše ostatní.</p>
+</div>
+</div>
+<!-- 6 -->
+<div class="photo-card reveal reveal-d3">
+<div class="photo-card-img"><img alt="Realizace zahrady" src="images/7.jpg" style="width:100%;height:100%;object-fit:cover;"/></div>
+<div class="photo-card-body">
+<div class="photo-card-title">Odvoz biomasy</div>
+<p class="photo-card-desc">Posečená tráva, listí, větve — vše odvezeme a ekologicky zlikvidujeme. Zahrada čistá hned.</p>
+</div>
+</div>
+</div>
+<div style="text-align:center;margin-top:48px">
+<a class="nav-btn" href="#kontakt" style="display:inline-block;font-size:.82rem">Poptat službu →</a>
+</div>
+</section>
+<!-- PRICING -->
+<section id="cenik">
+<div class="cenik-intro">
+<div>
+<p class="section-label reveal">Ceník</p>
+<h2 class="cenik-h reveal reveal-d1">Férové ceny,<br/><em>žádná překvapení</em></h2>
+</div>
+<p class="cenik-sub reveal reveal-d2">Ceny závisí na velikosti zahrady a stavu trávy. Pošlete nám fotku — přesnou nabídku dostanete do 24 hodin zdarma.</p>
+</div>
+<div class="cenik-grid">
+<div class="cenik-card reveal">
+<div class="cenik-card-head">
+<span class="cenik-card-head-icon">🌾</span>
+<div class="cenik-card-head-title">Sekání trávy</div>
+</div>
+<div class="cenik-body">
+<div class="cenik-row">
+<div class="cenik-row-name"><strong>Běžné sečení</strong><small>nízká tráva do 10–20 cm</small></div>
+<div class="cenik-row-price">1,20–3,50 Kč/m²</div>
+</div>
+<div class="cenik-row">
+<div class="cenik-row-name"><strong>Přerostlá tráva</strong><small>výška 20–35 cm</small></div>
+<div class="cenik-row-price">3,00–6,00 Kč/m²</div>
+</div>
+<div class="cenik-row">
+<div class="cenik-row-name"><strong>Svahy a těžký terén</strong><small>křovinořez, příkopy</small></div>
+<div class="cenik-row-price">6,00–14,00 Kč/m²</div>
+</div>
+<div class="cenik-row">
+<div class="cenik-row-name"><strong>Odvoz biomasy</strong><small>tráva, listí, větve</small></div>
+<div class="cenik-row-price">cca 500 Kč/m³</div>
+</div>
+</div>
+<div class="cenik-note"><strong>Tip:</strong> Sečení bez sběru je levnější. Se sběrem a odvozem cena dle množství.</div>
+</div>
+<div class="cenik-card reveal reveal-d1">
+<div class="cenik-card-head">
+<span class="cenik-card-head-icon">💧</span>
+<div class="cenik-card-head-title">Automatická závlaha</div>
+</div>
+<div class="cenik-body">
+<div class="cenik-row">
+<div class="cenik-row-name"><strong>Projekt systému</strong><small>často zdarma při realizaci</small></div>
+<div class="cenik-row-price">3 000–6 500 Kč</div>
+</div>
+<div class="cenik-row">
+<div class="cenik-row-name"><strong>Materiál a montáž</strong><small>postřikovače, ventily, potrubí</small></div>
+<div class="cenik-row-price">150–400 Kč/m²</div>
+</div>
+<div class="cenik-row">
+<div class="cenik-row-name"><strong>Střední zahrada 300–600 m²</strong><small>kompletní realizace na klíč</small></div>
+<div class="cenik-row-price">60 000–130 000 Kč</div>
+</div>
+<div class="cenik-row">
+<div class="cenik-row-name"><strong>Zazimování / spuštění</strong><small>jarní a podzimní servis</small></div>
+<div class="cenik-row-price">2 000–4 000 Kč</div>
+</div>
+</div>
+<div class="cenik-note"><strong>Tip:</strong> Přesná cena dle velikosti zahrady. Nacenění zdarma po zaslání fotky.</div>
+</div>
+</div>
+</section>
+<!-- PROCESS -->
+<section id="proces">
+<p class="section-label proces-label reveal">Jak to funguje</p>
+<h2 class="proces-h reveal reveal-d1">Jednoduché<br/>jako <em>čtyři kroky</em></h2>
+<div class="proces-steps">
+<div class="proc-step reveal">
+<div class="proc-num">01</div>
+<span class="proc-icon">📸</span>
+<div class="proc-h">Pošlete fotku</div>
+<p class="proc-p">Vyplňte formulář a přiložte fotku zahrady z telefonu. Stačí to.</p>
+</div>
+<div class="proc-step reveal reveal-d1">
+<div class="proc-num">02</div>
+<span class="proc-icon">💬</span>
+<div class="proc-h">Dostanete nabídku</div>
+<p class="proc-p">Do 24 hodin vám pošleme konkrétní cenu. Bez závazku, zdarma.</p>
+</div>
+<div class="proc-step reveal reveal-d2">
+<div class="proc-num">03</div>
+<span class="proc-icon">📅</span>
+<div class="proc-h">Domluvíme termín</div>
+<p class="proc-p">Vyberete termín který vám sedí. Nemusíte být ani doma.</p>
+</div>
+<div class="proc-step reveal reveal-d3">
+<div class="proc-num">04</div>
+<span class="proc-icon">✅</span>
+<div class="proc-h">Zahrada hotová</div>
+<p class="proc-p">Přijedeme, odvedeme práci, uklidíme. Platíte až po dokončení.</p>
+</div>
+</div>
+</section>
+<!-- CONTACT -->
+<section id="kontakt">
+<div aria-label="Kontakt" class="kontakt-img" role="img">
+<div class="kontakt-img-overlay">
+<div class="k-tag">Kontaktujte nás</div>
+<div class="k-quote">Pošlete nám fotku<br/><em>zahrady</em> — zbytek<br/>zařídíme my</div>
+<div class="k-contacts">
+<div class="k-contact">
+<div class="k-contact-icon">📞</div>
+<div class="k-contact-val">+420 777 000 222</div>
+</div>
+<div class="k-contact">
+<div class="k-contact-icon">✉️</div>
+<div class="k-contact-val">info@sečemtrávu.cz</div>
+</div>
+<div class="k-contact">
+<div class="k-contact-icon">📍</div>
+<div class="k-contact-val">Brno a okolí do 30 km</div>
+</div>
+<div class="k-contact">
+<div class="k-contact-icon">🕐</div>
+<div class="k-contact-val">Po–So 7:00–18:00</div>
+</div>
+</div>
+</div>
+</div>
+<div class="kontakt-form">
+<div class="form-title">Nezávazná poptávka zdarma</div>
+<form id="contactForm" novalidate="">
+<div class="fg-row">
+<div><label for="name">Jméno *</label><input id="name" placeholder="Jan Novák" required="" type="text"/></div>
+<div><label for="phone">Telefon *</label><input id="phone" placeholder="+420 777 123 456" required="" type="tel"/></div>
+</div>
+<div class="fg"><label for="email">Email *</label><input id="email" placeholder="jan@email.cz" required="" type="email"/></div>
+<div class="fg"><label for="adresa">Adresa zahrady</label><input id="adresa" placeholder="Ulice, Brno" type="text"/></div>
+<div class="fg">
+<label for="sluzba">Jakou službu potřebujete?</label>
+<select id="sluzba">
+<option value="">Vyberte…</option>
+<option>Sekání trávy</option>
+<option>Sekání + úprava okrajů</option>
+<option>Sekání křovinořezem</option>
+<option>Zavlažování na míru</option>
+<option>Odvoz trávy a biomasy</option>
+<option>Kompletní péče o zahradu</option>
+</select>
+</div>
+<div class="fg"><label for="zprava">Zpráva</label><textarea id="zprava" placeholder="Přibližná plocha zahrady, stav trávy, speciální požadavky…"></textarea></div>
+<div class="fg">
+<label>Fotky zahrady</label>
+<div class="file-drop">
+<input accept="image/*" aria-label="Nahrát fotky" id="photos" multiple="" onchange="showFiles(this)" type="file"/>
+<div class="file-drop-text">📷 <strong>Klikněte nebo přetáhněte fotky</strong> · JPG, PNG, HEIC</div>
+<div id="filenames"></div>
+</div>
+</div>
+<button class="submit-btn" id="submitBtn" type="submit">Odeslat poptávku zdarma</button>
+<p class="form-note">Odpovídáme do 24 hodin · Bez závazku · Zdarma</p>
+</form>
+<div class="success-box" id="successBox">✅ Vaše poptávka byla odeslána!<br/>Ozveme se vám do 24 hodin.</div>
+</div>
+</section>
+<!-- FOOTER -->
+<footer>
+<div class="footer-top">
+<div>
+<div class="footer-logo">Sečem <span>Trávu</span></div>
+<div class="footer-tagline">Profesionální zahradní služby · Brno a okolí</div>
+</div>
+<nav aria-label="Patička" class="footer-links">
+<a href="#o-nas">O nás</a>
+<a href="#sluzby">Služby</a>
+<a href="#cenik">Ceník</a>
+<a href="#kontakt">Kontakt</a>
+</nav>
+</div>
+<p class="footer-copy">© 2025 Sečem Trávu · Brno a okolí · Sekání trávy, zavlažování, křovinořez, odvoz biomasy</p>
+</footer>
+<script>
+// File names
+function showFiles(i){
+  const el=document.getElementById('filenames');
+  el.textContent=i.files.length?'📎 '+Array.from(i.files).map(f=>f.name).join(', '):'';
+}
+
+// Nav scroll
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>50)},{passive:true});
+
+// Mobile menu
+const btn=document.getElementById('hamburger');
+const menu=document.getElementById('mobileMenu');
+function closeMenu(){menu.classList.remove('open')}
+btn.addEventListener('click',()=>menu.classList.toggle('open'));
+
+// Reveal on scroll
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target)}});
+},{threshold:.12,rootMargin:'0px 0px -32px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// EmailJS
+// 1. Jdi na emailjs.com → zaregistruj se zdarma
+// 2. Vytvoř Email Service + Template
+// 3. Nahraď hodnoty níže
+const EJ_KEY='YOUR_PUBLIC_KEY';
+const EJ_SVC='YOUR_SERVICE_ID';
+const EJ_TPL='YOUR_TEMPLATE_ID';
+const s=document.createElement('script');
+s.src='https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+s.onload=()=>{if(EJ_KEY!=='YOUR_PUBLIC_KEY')emailjs.init(EJ_KEY)};
+document.head.appendChild(s);
+
+document.getElementById('contactForm').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const btn=document.getElementById('submitBtn');
+  btn.disabled=true;btn.textContent='Odesílám…';
+  const p={
+    name:document.getElementById('name').value,
+    phone:document.getElementById('phone').value,
+    email:document.getElementById('email').value,
+    adresa:document.getElementById('adresa').value,
+    sluzba:document.getElementById('sluzba').value,
+    zprava:document.getElementById('zprava').value,
+  };
+  try{
+    if(EJ_KEY==='YOUR_PUBLIC_KEY'){await new Promise(r=>setTimeout(r,900));}
+    else{await emailjs.send(EJ_SVC,EJ_TPL,p);}
+    document.getElementById('contactForm').style.display='none';
+    document.getElementById('successBox').classList.add('show');
+  }catch{
+    btn.disabled=false;btn.textContent='Odeslat poptávku zdarma';
+    alert('Nepodařilo se odeslat. Zavolejte nám na +420 777 000 222');
+  }
+});
+</script>
+</body>
+</html>
