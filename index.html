@@ -443,20 +443,6 @@ input:focus,textarea:focus,select:focus{
 input::placeholder,textarea::placeholder{color:#bbb}
 select option{background:var(--white);color:var(--charcoal)}
 textarea{resize:vertical;min-height:100px}
-.file-drop{
-  border:1.5px dashed var(--border);border-radius:2px;
-  padding:24px;text-align:center;
-  background:var(--white);cursor:pointer;position:relative;
-  transition:border-color .2s,background .2s;
-}
-.file-drop:hover{border-color:var(--green);background:var(--green-light)}
-.file-drop input{
-  position:absolute;inset:0;opacity:0;cursor:pointer;
-  width:100%;height:100%;border:none;padding:0;background:none;box-shadow:none;
-}
-.file-drop-text{font-size:.82rem;color:var(--gray)}
-.file-drop-text strong{color:var(--green)}
-#filenames{font-size:.75rem;color:var(--green);margin-top:6px;font-weight:600}
 .submit-btn{
   width:100%;margin-top:8px;padding:15px;border:none;border-radius:2px;
   background:var(--green);color:#fff;
@@ -473,6 +459,38 @@ textarea{resize:vertical;min-height:100px}
   color:var(--green);font-size:.93rem;line-height:1.6;margin-top:12px;
 }
 .success-box.show{display:block}
+
+/* MAPA */
+.mapa-section{
+  padding:80px var(--pad);
+  background:var(--white);
+  text-align:center;
+}
+.mapa-section .section-label{justify-content:center}
+.mapa-h{
+  font-family:var(--serif);
+  font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;
+  letter-spacing:-.02em;color:var(--charcoal);
+  margin-bottom:16px;
+}
+.mapa-link{margin-bottom:32px}
+.mapa-link a{
+  font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--green);text-decoration:none;border-bottom:1.5px solid var(--green);
+  padding-bottom:2px;transition:color .2s,border-color .2s;
+}
+.mapa-link a:hover{color:var(--green-mid);border-color:var(--green-mid)}
+.mapa-embed{
+  max-width:1100px;margin:0 auto;
+  aspect-ratio:16/6;
+  border-radius:4px;overflow:hidden;
+  border:1px solid var(--border);
+  filter:saturate(.9);
+}
+.mapa-embed iframe{width:100%;height:100%;display:block}
+@media(max-width:760px){
+  .mapa-embed{aspect-ratio:4/5}
+}
 
 /* FOOTER */
 footer{
@@ -837,18 +855,19 @@ footer{
 </select>
 </div>
 <div class="fg"><label for="zprava">Zpráva</label><textarea id="zprava" placeholder="Přibližná plocha zahrady, stav trávy, speciální požadavky…"></textarea></div>
-<div class="fg">
-<label>Fotky zahrady</label>
-<div class="file-drop">
-<input accept="image/*" aria-label="Nahrát fotky" id="photos" multiple="" onchange="showFiles(this)" type="file"/>
-<div class="file-drop-text">📷 <strong>Klikněte nebo přetáhněte fotky</strong> · JPG, PNG, HEIC</div>
-<div id="filenames"></div>
-</div>
-</div>
 <button class="submit-btn" id="submitBtn" type="submit">Odeslat poptávku zdarma</button>
 <p class="form-note">Odpovídáme do 24 hodin · Bez závazku · Zdarma</p>
 </form>
 <div class="success-box" id="successBox">✅ Vaše poptávka byla odeslána!<br/>Ozveme se vám do 24 hodin.</div>
+</div>
+</section>
+<!-- MAPA -->
+<section id="mapa" class="mapa-section">
+<p class="section-label reveal">Kde nás najdete</p>
+<h2 class="mapa-h reveal reveal-d1">Mezníkova 394/4, Brno-Žabovřesky</h2>
+<p class="mapa-link reveal reveal-d2"><a href="https://www.google.com/maps/place/Mezn%C3%ADkova+394%2F4,+616+00+Brno-%C5%BDabov%C5%99esky,+Czechia/@49.2107946,16.5812557,16z/data=!3m1!4b1!4m6!3m5!1s0x47129417db5c9fdb:0x93f027e25e4b8bc4!8m2!3d49.2107911!4d16.583836!16s%2Fg%2F11c270n_8_!5m1!1e2?hl=en-US" target="_blank" rel="noopener">Otevřít v Google Maps →</a></p>
+<div class="mapa-embed reveal reveal-d3">
+<iframe src="https://www.google.com/maps?q=Mezn%C3%ADkova+394%2F4,+616+00+Brno-%C5%BDabov%C5%99esky,+Czechia&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa — Mezníkova 394/4, Brno-Žabovřesky"></iframe>
 </div>
 </section>
 <!-- FOOTER -->
@@ -868,12 +887,6 @@ footer{
 <p class="footer-copy">© 2025 Sečem Trávu · Brno a okolí · Sekání trávy, zavlažování, křovinořez, odvoz biomasy</p>
 </footer>
 <script>
-// File names
-function showFiles(i){
-  const el=document.getElementById('filenames');
-  el.textContent=i.files.length?'📎 '+Array.from(i.files).map(f=>f.name).join(', '):'';
-}
-
 // Nav scroll
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>50)},{passive:true});
@@ -890,23 +903,17 @@ const obs=new IntersectionObserver(entries=>{
 },{threshold:.12,rootMargin:'0px 0px -32px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-// EmailJS
-// 1. Jdi na emailjs.com → zaregistruj se zdarma
-// 2. Vytvoř Email Service + Template
-// 3. Nahraď hodnoty níže
-const EJ_KEY='YOUR_PUBLIC_KEY';
-const EJ_SVC='YOUR_SERVICE_ID';
-const EJ_TPL='YOUR_TEMPLATE_ID';
-const s=document.createElement('script');
-s.src='https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
-s.onload=()=>{if(EJ_KEY!=='YOUR_PUBLIC_KEY')emailjs.init(EJ_KEY)};
-document.head.appendChild(s);
+// Web3Forms
+const W3F_ACCESS_KEY='4151fa46-3bf2-4bec-9d5c-413f021d2fc6';
 
 document.getElementById('contactForm').addEventListener('submit',async function(e){
   e.preventDefault();
   const btn=document.getElementById('submitBtn');
   btn.disabled=true;btn.textContent='Odesílám…';
   const p={
+    access_key:W3F_ACCESS_KEY,
+    subject:'Nová poptávka z webu Sečem Trávu',
+    from_name:'Sečem Trávu — web',
     name:document.getElementById('name').value,
     phone:document.getElementById('phone').value,
     email:document.getElementById('email').value,
@@ -915,8 +922,13 @@ document.getElementById('contactForm').addEventListener('submit',async function(
     zprava:document.getElementById('zprava').value,
   };
   try{
-    if(EJ_KEY==='YOUR_PUBLIC_KEY'){await new Promise(r=>setTimeout(r,900));}
-    else{await emailjs.send(EJ_SVC,EJ_TPL,p);}
+    const res=await fetch('https://api.web3forms.com/submit',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify(p)
+    });
+    const result=await res.json();
+    if(!result.success) throw new Error(result.message||'Odeslání se nezdařilo');
     document.getElementById('contactForm').style.display='none';
     document.getElementById('successBox').classList.add('show');
   }catch{
