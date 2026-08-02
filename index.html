@@ -403,8 +403,12 @@ nav.scrolled{background:rgba(20,20,20,.65);box-shadow:0 10px 30px rgba(0,0,0,.25
 .kontakt-img-overlay{
   position:absolute;inset:0;
   background:linear-gradient(135deg,rgba(42,92,53,.8),rgba(0,0,0,.4));
-  display:flex;flex-direction:column;justify-content:flex-end;
+  display:flex;flex-direction:column;justify-content:flex-start;
   padding:48px;
+}
+.kontakt-sticky{
+  position:sticky;
+  top:112px;
 }
 .k-tag{
   font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
@@ -818,6 +822,7 @@ footer{
 <section id="kontakt">
 <div aria-label="Kontakt" class="kontakt-img" role="img">
 <div class="kontakt-img-overlay">
+<div class="kontakt-sticky">
 <img src="images/logo.jpeg" alt="Posečem.cz" class="logo-badge logo-badge-lg"/>
 <div class="k-tag">Kontaktujte nás</div>
 <div class="k-contacts">
@@ -836,6 +841,7 @@ footer{
 <div class="k-contact">
 <div class="k-contact-icon">🕐</div>
 <div class="k-contact-val">Po–So 7:00–18:00</div>
+</div>
 </div>
 </div>
 </div>
