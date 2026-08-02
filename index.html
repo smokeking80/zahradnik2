@@ -67,6 +67,8 @@ img{display:block;max-width:100%}
   color:var(--green);margin-bottom:8px;letter-spacing:-.01em;
 }
 .photo-card-desc{font-size:.875rem;color:var(--gray);line-height:1.65}
+.photo-card-body .svc-link{margin-top:14px;display:inline-block}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
 
@@ -561,14 +563,14 @@ footer{
   .stats-bar{grid-template-columns:1fr}
   .stat{border-right:none;border-bottom:1px solid rgba(255,255,255,.12);padding:28px var(--pad)}
   .stat:last-child{border-bottom:none}
-  #galerie .grid-3{grid-template-columns:1fr 1fr}
+  #sluzby .grid-3{grid-template-columns:1fr 1fr}
 }
 @media(max-width:600px){
   .hero-h1{font-size:clamp(2.4rem,10vw,3.5rem)}
   .proces-steps{grid-template-columns:1fr}
   .fg-row{grid-template-columns:1fr}
   .footer-top{flex-direction:column;gap:24px}
-  #galerie .grid-3{grid-template-columns:1fr}
+  #sluzby .grid-3{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -649,97 +651,61 @@ footer{
 </div>
 <p class="sluzby-sub reveal reveal-d2">Od pravidelného sekání přes automatické zavlažování až po odvoz biomasy. Kompletní péče o zahradu na jednom místě.</p>
 </div>
-<div class="services-grid">
-<div class="svc reveal">
-<div class="svc-num">01</div>
-<span class="svc-icon">🌾</span>
-<div class="svc-name">Sekání trávy</div>
-<p class="svc-desc">Pravidelné sekání travního porostu profesionální technikou. Výsledek čistý, rovnoměrný, okraje upravené.</p>
-<a class="svc-link" href="#kontakt">Poptat →</a>
-</div>
-<div class="svc reveal reveal-d1">
-<div class="svc-num">02</div>
-<span class="svc-icon">💧</span>
-<div class="svc-name">Zavlažování na míru</div>
-<p class="svc-desc">Návrh a instalace automatického závlahového systému. Trávník zelený i v létě — bez vaší námahy.</p>
-<a class="svc-link" href="#kontakt">Poptat →</a>
-</div>
-<div class="svc reveal reveal-d2">
-<div class="svc-num">03</div>
-<span class="svc-icon">✂️</span>
-<div class="svc-name">Sekání křovinořezem</div>
-<p class="svc-desc">Svahy, příkopy, obtížný terén a místa kde sekačka nedojede. Křovinořez zvládne vše.</p>
-<a class="svc-link" href="#kontakt">Poptat →</a>
-</div>
-<div class="svc reveal reveal-d3">
-<div class="svc-num">04</div>
-<span class="svc-icon">🍃</span>
-<div class="svc-name">Odvoz trávy a biomasy</div>
-<p class="svc-desc">Tráva, listí, větve — vše odvezeme a ekologicky zlikvidujeme. Zahrada čistá hned po nás.</p>
-<a class="svc-link" href="#kontakt">Poptat →</a>
-</div>
-</div>
-</section>
-<!-- PHOTO GRID -->
-<section id="galerie" style="padding:100px var(--pad);background:var(--cream)">
-<div style="text-align:center;margin-bottom:64px">
-<p class="section-label reveal" style="justify-content:center;margin-bottom:12px">
-<span style="display:none">—</span>Co děláme
-    </p>
-<h2 class="reveal" style="font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,3.4rem);font-weight:700;line-height:1.05;letter-spacing:-.02em;color:var(--charcoal)">Naše <em style="font-style:italic;color:var(--green)">služby</em> v praxi</h2>
-</div>
-<div class="grid-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px">
+<div class="grid-3">
 <!-- 1 -->
 <div class="photo-card reveal">
 <div class="photo-card-img"><img alt="Sekání trávy" src="images/8.png" style="width:100%;height:100%;object-fit:cover;"/></div>
 <div class="photo-card-body">
 <div class="photo-card-title">Sekání trávy</div>
 <p class="photo-card-desc">Pravidelné sekání travního porostu profesionální technikou. Výsledek vždy čistý a rovnoměrný.</p>
+<a class="svc-link" href="#kontakt">Poptat →</a>
 </div>
 </div>
 <!-- 2 -->
 <div class="photo-card reveal reveal-d1">
-<div class="photo-card-img"><img alt="Úprava okrajů" src="images/12.jpg" style="width:100%;height:100%;object-fit:cover;"/></div>
+<div class="photo-card-img"><img alt="Zavlažování na míru" src="images/3.jpeg" style="width:100%;height:100%;object-fit:cover;"/></div>
 <div class="photo-card-body">
-<div class="photo-card-title">Úprava okrajů</div>
-<p class="photo-card-desc">Precizní úprava okrajů trávníku podél chodníků, záhonů a obrubníků. Detail, který změní vše.</p>
+<div class="photo-card-title">Zavlažování na míru</div>
+<p class="photo-card-desc">Návrh a instalace automatického závlahového systému. Trávník zelený celé léto bez vaší námahy.</p>
+<a class="svc-link" href="#kontakt">Poptat →</a>
 </div>
 </div>
 <!-- 3 -->
 <div class="photo-card reveal reveal-d2">
-<div class="photo-card-img"><img alt="Zavlažování" src="images/3.jpeg" style="width:100%;height:100%;object-fit:cover;"/></div>
-<div class="photo-card-body">
-<div class="photo-card-title">Zavlažování na míru</div>
-<p class="photo-card-desc">Návrh a instalace automatického závlahového systému. Trávník zelený celé léto bez vaší námahy.</p>
-</div>
-</div>
-<!-- 4 -->
-<div class="photo-card reveal reveal-d1">
-<div class="photo-card-img"><img alt="Odvoz biomasy" src="images/20.jpg" style="width:100%;height:100%;object-fit:cover;"/></div>
-<div class="photo-card-body">
-<div class="photo-card-title">Hrabání listí</div>
-<p class="photo-card-desc">Podzimní úklid zahrady — hrabání listí, sběr a odvoz. Zahrada připravená na zimu.</p>
-</div>
-</div>
-<!-- 5 -->
-<div class="photo-card reveal reveal-d2">
-<div class="photo-card-img"><img alt="Údržba zahrady" src="images/11.jpeg" style="width:100%;height:100%;object-fit:cover;"/></div>
+<div class="photo-card-img"><img alt="Sekání křovinořezem" src="images/11.jpeg" style="width:100%;height:100%;object-fit:cover;"/></div>
 <div class="photo-card-body">
 <div class="photo-card-title">Sekání křovinořezem</div>
 <p class="photo-card-desc">Svahy, příkopy a obtížný terén kde sekačka nedojede. Křovinořez zvládne vše ostatní.</p>
+<a class="svc-link" href="#kontakt">Poptat →</a>
+</div>
+</div>
+<!-- 4 -->
+<div class="photo-card reveal">
+<div class="photo-card-img"><img alt="Úprava okrajů" src="images/12.jpg" style="width:100%;height:100%;object-fit:cover;"/></div>
+<div class="photo-card-body">
+<div class="photo-card-title">Úprava okrajů</div>
+<p class="photo-card-desc">Precizní úprava okrajů trávníku podél chodníků, záhonů a obrubníků. Detail, který změní vše.</p>
+<a class="svc-link" href="#kontakt">Poptat →</a>
+</div>
+</div>
+<!-- 5 -->
+<div class="photo-card reveal reveal-d1">
+<div class="photo-card-img"><img alt="Hrabání listí" src="images/20.jpg" style="width:100%;height:100%;object-fit:cover;"/></div>
+<div class="photo-card-body">
+<div class="photo-card-title">Hrabání listí</div>
+<p class="photo-card-desc">Podzimní úklid zahrady — hrabání listí, sběr a odvoz. Zahrada připravená na zimu.</p>
+<a class="svc-link" href="#kontakt">Poptat →</a>
 </div>
 </div>
 <!-- 6 -->
-<div class="photo-card reveal reveal-d3">
-<div class="photo-card-img"><img alt="Realizace zahrady" src="images/4.jpeg" style="width:100%;height:100%;object-fit:cover;"/></div>
+<div class="photo-card reveal reveal-d2">
+<div class="photo-card-img"><img alt="Odvoz trávy a biomasy" src="images/4.jpeg" style="width:100%;height:100%;object-fit:cover;"/></div>
 <div class="photo-card-body">
-<div class="photo-card-title">Odvoz biomasy</div>
+<div class="photo-card-title">Odvoz trávy a biomasy</div>
 <p class="photo-card-desc">Posečená tráva, listí, větve — vše odvezeme a ekologicky zlikvidujeme. Zahrada čistá hned.</p>
+<a class="svc-link" href="#kontakt">Poptat →</a>
 </div>
 </div>
-</div>
-<div style="text-align:center;margin-top:48px">
-<a class="nav-btn" href="#kontakt" style="display:inline-block;font-size:.82rem">Poptat službu →</a>
 </div>
 </section>
 <!-- PRICING -->
