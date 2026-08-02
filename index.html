@@ -460,6 +460,19 @@ input:focus,textarea:focus,select:focus{
 input::placeholder,textarea::placeholder{color:#bbb}
 select option{background:var(--white);color:var(--charcoal)}
 textarea{resize:vertical;min-height:100px}
+.kontakt-form label{color:var(--charcoal)}
+.choice-group{display:flex;flex-direction:column;gap:8px}
+.choice-option{
+  display:flex;align-items:center;gap:9px;
+  font-size:.88rem;font-weight:400;text-transform:none;letter-spacing:normal;
+  color:var(--charcoal);cursor:pointer;
+}
+.choice-option input[type="radio"],.choice-option input[type="checkbox"]{
+  width:16px;height:16px;flex:0 0 auto;accent-color:var(--green);
+  -webkit-appearance:auto;appearance:auto;padding:0;
+}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px}
+@media(max-width:480px){.choice-grid{grid-template-columns:1fr}}
 .submit-btn{
   width:100%;margin-top:8px;padding:15px;border:none;border-radius:2px;
   background:var(--green);color:#fff;
@@ -848,7 +861,36 @@ footer{
 <option>Kompletní péče o zahradu</option>
 </select>
 </div>
-<div class="fg"><label for="zprava">Zpráva</label><textarea id="zprava" placeholder="Přibližná plocha zahrady, stav trávy, speciální požadavky…"></textarea></div>
+<div class="fg"><label for="plocha">Přibližná plocha (m²)</label><input id="plocha" placeholder="např. 400" type="number" min="0" step="1"/></div>
+<div class="fg">
+<label>Jak svažitý je pozemek?</label>
+<div class="choice-group">
+<label class="choice-option"><input type="radio" name="svah" value="rovný"/> rovný</label>
+<label class="choice-option"><input type="radio" name="svah" value="mírný svah"/> mírný svah</label>
+<label class="choice-option"><input type="radio" name="svah" value="střední svah"/> střední svah</label>
+<label class="choice-option"><input type="radio" name="svah" value="velký svah"/> velký svah</label>
+</div>
+</div>
+<div class="fg">
+<label>Překážky na pozemku</label>
+<div class="choice-group choice-grid">
+<label class="choice-option"><input type="checkbox" name="prekazky" value="bez překážek"/> bez překážek</label>
+<label class="choice-option"><input type="checkbox" name="prekazky" value="stromy"/> stromy</label>
+<label class="choice-option"><input type="checkbox" name="prekazky" value="kameny a stavební odpad"/> kameny a stavební odpad</label>
+<label class="choice-option"><input type="checkbox" name="prekazky" value="jámy"/> jámy</label>
+<label class="choice-option"><input type="checkbox" name="prekazky" value="jiné"/> jiné</label>
+</div>
+</div>
+<div class="fg">
+<label>Přibližná výška trávy</label>
+<div class="choice-group choice-grid">
+<label class="choice-option"><input type="checkbox" name="vyska_travy" value="do 20 cm"/> tráva do 20 cm</label>
+<label class="choice-option"><input type="checkbox" name="vyska_travy" value="20–50 cm"/> tráva 20–50 cm</label>
+<label class="choice-option"><input type="checkbox" name="vyska_travy" value="50–100 cm"/> tráva 50–100 cm</label>
+<label class="choice-option"><input type="checkbox" name="vyska_travy" value="nad 100 cm"/> tráva nad 100 cm</label>
+</div>
+</div>
+<div class="fg"><label for="zprava">Zpráva</label><textarea id="zprava" placeholder="Speciální požadavky, preferovaný termín…"></textarea></div>
 <button class="submit-btn" id="submitBtn" type="submit">Odeslat poptávku zdarma</button>
 <p class="form-note">Odpovídáme do 24 hodin · Bez závazku · Zdarma</p>
 </form>
@@ -918,6 +960,9 @@ document.getElementById('contactForm').addEventListener('submit',async function(
   e.preventDefault();
   const btn=document.getElementById('submitBtn');
   btn.disabled=true;btn.textContent='Odesílám…';
+  const svah=document.querySelector('input[name="svah"]:checked');
+  const prekazky=Array.from(document.querySelectorAll('input[name="prekazky"]:checked')).map(i=>i.value).join(', ');
+  const vyskaTravy=Array.from(document.querySelectorAll('input[name="vyska_travy"]:checked')).map(i=>i.value).join(', ');
   const p={
     access_key:W3F_ACCESS_KEY,
     subject:'Nová poptávka z webu Posečem.cz',
@@ -927,6 +972,10 @@ document.getElementById('contactForm').addEventListener('submit',async function(
     email:document.getElementById('email').value,
     adresa:document.getElementById('adresa').value,
     sluzba:document.getElementById('sluzba').value,
+    plocha:document.getElementById('plocha').value,
+    svazitost_pozemku:svah?svah.value:'',
+    prekazky:prekazky,
+    vyska_travy:vyskaTravy,
     zprava:document.getElementById('zprava').value,
   };
   try{
