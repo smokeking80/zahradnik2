@@ -86,8 +86,10 @@ nav.scrolled{background:rgba(20,20,20,.65);box-shadow:0 10px 30px rgba(0,0,0,.25
 .nav-logo{
   font-family:var(--serif);font-size:1.3rem;font-weight:700;
   color:#fff;text-decoration:none;letter-spacing:-.01em;
+  display:flex;align-items:center;
 }
 .nav-logo span{color:var(--green)}
+.nav-logo-img{height:42px;width:auto;display:block;border-radius:4px;}
 .nav-links{display:flex;gap:36px;list-style:none}
 .nav-links a{
   font-size:.82rem;font-weight:500;letter-spacing:.06em;
@@ -506,7 +508,9 @@ footer{
 .footer-logo{
   font-family:var(--serif);font-size:1.3rem;font-weight:700;
   color:#fff;margin-bottom:8px;
+  display:flex;align-items:center;gap:10px;
 }
+.footer-logo-img{height:38px;width:auto;display:block;border-radius:4px;}
 .footer-logo span{color:var(--green-mid)}
 .footer-tagline{font-size:.8rem;color:rgba(255,255,255,.4)}
 .footer-links{display:flex;gap:28px;flex-wrap:wrap;align-items:center}
@@ -558,7 +562,7 @@ footer{
 <body>
 <!-- NAV -->
 <nav id="nav">
-<a class="nav-logo" href="#">Sečem <span>Trávu</span></a>
+<a class="nav-logo" href="#"><img class="nav-logo-img" src="images/logo.jpeg" alt="Posečem.cz"/></a>
 <ul class="nav-links">
 <li><a href="#o-nas">O nás</a></li>
 <li><a href="#sluzby">Služby</a></li>
@@ -605,7 +609,7 @@ footer{
 <section id="o-nas">
 <div aria-label="Zahrada v Brně" class="about-img" role="img">
 <div style="position:relative;z-index:2">
-<div style="font-size:4rem;margin-bottom:16px">🌿</div>
+<img src="images/logo.jpeg" alt="Posečem.cz" style="width:120px;height:120px;border-radius:12px;margin-bottom:24px;box-shadow:0 16px 40px rgba(0,0,0,.35)"/>
 <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:#fff;line-height:1.2;letter-spacing:-.02em">Každá zahrada<br/>si zaslouží<br/><em style="font-style:italic;color:rgba(255,255,255,.7)">péči</em></div>
 </div>
 <div style="position:absolute;inset:0;background-image:radial-gradient(circle at 20% 80%,rgba(255,255,255,.05) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(255,255,255,.08) 0%,transparent 40%);pointer-events:none"></div>
@@ -822,6 +826,7 @@ footer{
 <section id="kontakt">
 <div aria-label="Kontakt" class="kontakt-img" role="img">
 <div class="kontakt-img-overlay">
+<img src="images/logo.jpeg" alt="Posečem.cz" style="width:96px;height:96px;border-radius:10px;margin-bottom:28px;box-shadow:0 16px 40px rgba(0,0,0,.35)"/>
 <div class="k-tag">Kontaktujte nás</div>
 <div class="k-contacts">
 <div class="k-contact">
@@ -884,7 +889,7 @@ footer{
 <footer>
 <div class="footer-top">
 <div>
-<div class="footer-logo">Sečem <span>Trávu</span></div>
+<div class="footer-logo"><img class="footer-logo-img" src="images/logo.jpeg" alt="Posečem.cz"/></div>
 <div class="footer-tagline">Profesionální zahradní služby · Brno a okolí</div>
 </div>
 <nav aria-label="Patička" class="footer-links">
