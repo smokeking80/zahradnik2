@@ -425,6 +425,10 @@ nav.scrolled{background:rgba(20,20,20,.65);box-shadow:0 10px 30px rgba(0,0,0,.25
   font-size:.9rem;flex-shrink:0;
 }
 .k-contact-val{font-size:.9rem;color:rgba(255,255,255,.8);font-weight:500}
+.k-contact-link{text-decoration:none;cursor:pointer;transition:transform .2s}
+.k-contact-link:hover{transform:translateX(4px)}
+.k-contact-link:hover .k-contact-icon{background:rgba(255,255,255,.22)}
+.k-contact-link:hover .k-contact-val{color:#fff}
 .kontakt-form{
   background:var(--cream);
   padding:72px clamp(28px,4vw,64px);
@@ -838,14 +842,14 @@ footer{
 <img src="images/logo.jpeg" alt="Posečem.cz" class="logo-badge logo-badge-lg"/>
 <div class="k-tag">Kontaktujte nás</div>
 <div class="k-contacts">
-<div class="k-contact">
+<a class="k-contact k-contact-link" href="tel:+420777000222">
 <div class="k-contact-icon">📞</div>
 <div class="k-contact-val">+420 777 000 222</div>
-</div>
-<div class="k-contact">
+</a>
+<a class="k-contact k-contact-link" href="#contactForm">
 <div class="k-contact-icon">✉️</div>
 <div class="k-contact-val">info@posecem.cz</div>
-</div>
+</a>
 <div class="k-contact">
 <div class="k-contact-icon">📍</div>
 <div class="k-contact-val">Brno a okolí do 30 km</div>
