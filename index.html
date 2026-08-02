@@ -219,11 +219,19 @@ nav.scrolled{background:rgba(20,20,20,.65);box-shadow:0 10px 30px rgba(0,0,0,.25
   display:grid;grid-template-columns:1fr 1fr;
   min-height:600px;
 }
+.logo-badge{
+  display:block;border-radius:14px;
+  box-shadow:0 16px 40px rgba(0,0,0,.35);
+}
+.logo-badge-md{width:clamp(90px,22vw,220px);height:clamp(90px,22vw,220px);margin-bottom:clamp(16px,3vw,28px);}
+.logo-badge-lg{width:clamp(100px,26vw,280px);height:clamp(100px,26vw,280px);margin-bottom:clamp(18px,3.5vw,32px);}
+
 .about-img{
   background:
     linear-gradient(135deg, #2A5C35 0%, #3D7A4A 40%, #5A9E65 70%, #7AB87F 100%);
   display:flex;align-items:flex-end;justify-content:flex-start;padding:48px;
   min-height:500px;
+  overflow:hidden;
 }
 .about-text{
   padding:80px clamp(32px,5vw,80px);
@@ -388,6 +396,7 @@ nav.scrolled{background:rgba(20,20,20,.65);box-shadow:0 10px 30px rgba(0,0,0,.25
 .kontakt-img{
   background:linear-gradient(135deg, #1a3a20 0%, #2A5C35 60%, #3D7A4A 100%);
   position:relative;
+  overflow:hidden;
 }
 .kontakt-img-overlay{
   position:absolute;inset:0;
@@ -544,7 +553,7 @@ footer{
   .proces-steps{grid-template-columns:1fr 1fr}
   .proc-step{border-right:none;border-bottom:1px solid rgba(255,255,255,.08);padding:32px 0}
   #kontakt{grid-template-columns:1fr}
-  .kontakt-img{min-height:400px}
+  .kontakt-img{min-height:560px}
   .stats-bar{grid-template-columns:1fr}
   .stat{border-right:none;border-bottom:1px solid rgba(255,255,255,.12);padding:28px var(--pad)}
   .stat:last-child{border-bottom:none}
@@ -609,7 +618,7 @@ footer{
 <section id="o-nas">
 <div aria-label="Zahrada v Brně" class="about-img" role="img">
 <div style="position:relative;z-index:2">
-<img src="images/logo.jpeg" alt="Posečem.cz" style="width:220px;height:220px;border-radius:18px;margin-bottom:28px;box-shadow:0 20px 50px rgba(0,0,0,.35)"/>
+<img src="images/logo.jpeg" alt="Posečem.cz" class="logo-badge logo-badge-md"/>
 <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:#fff;line-height:1.2;letter-spacing:-.02em">Každá zahrada<br/>si zaslouží<br/><em style="font-style:italic;color:rgba(255,255,255,.7)">péči</em></div>
 </div>
 <div style="position:absolute;inset:0;background-image:radial-gradient(circle at 20% 80%,rgba(255,255,255,.05) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(255,255,255,.08) 0%,transparent 40%);pointer-events:none"></div>
@@ -826,7 +835,7 @@ footer{
 <section id="kontakt">
 <div aria-label="Kontakt" class="kontakt-img" role="img">
 <div class="kontakt-img-overlay">
-<img src="images/logo.jpeg" alt="Posečem.cz" style="width:280px;height:280px;border-radius:20px;margin-bottom:32px;box-shadow:0 24px 60px rgba(0,0,0,.4)"/>
+<img src="images/logo.jpeg" alt="Posečem.cz" class="logo-badge logo-badge-lg"/>
 <div class="k-tag">Kontaktujte nás</div>
 <div class="k-contacts">
 <div class="k-contact">
