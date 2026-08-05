@@ -29,6 +29,57 @@ body{font-family:var(--sans);background:var(--cream);color:var(--charcoal);overf
 ::-webkit-scrollbar-thumb{background:var(--green)}
 img{display:block;max-width:100%}
 
+/* HERO TILES — grassandgarden styl */
+.hero-tiles{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:3px;
+  z-index:3;
+}
+.hero-tile{
+  position:relative;
+  display:block;
+  overflow:hidden;
+  aspect-ratio:3/2;
+  text-decoration:none;
+}
+.hero-tile-img{
+  position:absolute;inset:0;
+  transition:transform .5s cubic-bezier(.22,1,.36,1);
+}
+.hero-tile:hover .hero-tile-img{transform:scale(1.08)}
+.hero-tile-img img{
+  width:100%;height:100%;
+  object-fit:cover;display:block;
+}
+.hero-tile::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.75) 0%,rgba(0,0,0,.1) 60%,transparent 100%);
+  z-index:1;
+}
+.hero-tile-label{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  padding:10px 12px;
+  font-family:var(--serif);
+  font-size:clamp(.8rem,1.2vw,1rem);
+  font-weight:700;color:#fff;
+  letter-spacing:-.01em;
+  z-index:2;
+  transition:padding .3s cubic-bezier(.22,1,.36,1);
+}
+.hero-tile:hover .hero-tile-label{padding-bottom:16px}
+@media(max-width:760px){
+  .hero-tiles{grid-template-columns:repeat(3,1fr)}
+  .hero-tile{aspect-ratio:1/1}
+}
+@media(max-width:480px){
+  .hero-tiles{grid-template-columns:repeat(2,1fr)}
+}
+
 /* TOP GRID — grassandgarden styl */
 .top-grid-section{
   background:var(--charcoal);
@@ -184,19 +235,19 @@ nav.scrolled{background:rgba(20,20,20,.65);box-shadow:0 10px 30px rgba(0,0,0,.25
 
 /* HERO */
 #hero{
-  position:relative;height:100vh;min-height:600px;
-  display:flex;align-items:flex-end;
+  position:relative;height:100vh;min-height:640px;
+  display:flex;align-items:center;
   overflow:hidden;
 }
 .hero-img{
   position:absolute;inset:0;
   background:
-    linear-gradient(to bottom, rgba(0,0,0,.15) 0%, rgba(0,0,0,.55) 100%),
+    linear-gradient(to bottom, rgba(0,0,0,.1) 0%, rgba(0,0,0,.3) 50%, rgba(0,0,0,.7) 100%),
     url("images/1.jpeg") center/cover no-repeat;
 }
 .hero-content{
   position:relative;z-index:2;
-  padding:0 var(--pad) 80px;
+  padding:0 var(--pad) 240px;
   max-width:900px;
 }
 .hero-tag{
@@ -674,84 +725,44 @@ footer{
 <a href="#kontakt" onclick="closeMenu()">Kontakt</a>
 <a class="nav-btn" href="#kontakt" onclick="closeMenu()">Poptávka zdarma</a>
 </div>
-<!-- HERO -->
+<!-- HERO s mřížkou služeb jako grassandgarden -->
 <section id="hero">
 <div aria-label="Krásně posečený trávník" class="hero-img" role="img"></div>
 <div class="hero-content">
 <div class="hero-tag">Brno a okolí · Profesionální zahradní služby</div>
 <h1 class="hero-h1">Zahrada,<br/>na kterou jste<br/><em>hrdí.</em></h1>
-<p class="hero-sub">Sekání trávy, zavlažování na míru, křovinořez a odvoz biomasy. Výjezd do 24 hodin — zavolejte dnes, jsme u vás zítra.</p>
+<p class="hero-sub">Sekání trávy, zavlažování na míru, křovinořez a odvoz biomasy. Výjezd do 24 hodin.</p>
 <div class="hero-actions">
 <a class="btn-white" href="#kontakt">Poptat sekání</a>
-<a class="btn-outline-white" href="#kontakt">Naše služby</a>
+<a class="btn-outline-white" href="#kontakt">Zavolat</a>
 </div>
 </div>
-<div class="hero-scroll">
-<div class="scroll-line"></div>
-    Rolovat dolů
-  </div>
-</section>
-<!-- GRID SLUŽBY — grassandgarden styl -->
-<section class="top-grid-section" id="top-sluzby">
-  <div class="top-grid-wrap">
-    <a href="#kontakt" class="top-tile">
-      <div class="top-tile-img">
-        <img src="images/8.png" alt="Sekání trávy"/>
-      </div>
-      <div class="top-tile-label">Sekání trávy</div>
-    </a>
-    <a href="#kontakt" class="top-tile">
-      <div class="top-tile-img">
-        <img src="images/3.jpeg" alt="Zavlažování"/>
-      </div>
-      <div class="top-tile-label">Zavlažování</div>
-    </a>
-    <a href="#kontakt" class="top-tile">
-      <div class="top-tile-img">
-        <img src="images/11.jpeg" alt="Sekání křovinořezem"/>
-      </div>
-      <div class="top-tile-label">Křovinořez</div>
-    </a>
-    <a href="#kontakt" class="top-tile">
-      <div class="top-tile-img">
-        <img src="images/12.jpg" alt="Úprava okrajů"/>
-      </div>
-      <div class="top-tile-label">Úprava okrajů</div>
-    </a>
-    <a href="#kontakt" class="top-tile">
-      <div class="top-tile-img">
-        <img src="images/20.jpg" alt="Hrabání listí"/>
-      </div>
-      <div class="top-tile-label">Hrabání listí</div>
-    </a>
-    <a href="#kontakt" class="top-tile">
-      <div class="top-tile-img">
-        <img src="images/4.jpeg" alt="Odvoz biomasy"/>
-      </div>
-      <div class="top-tile-label">Odvoz biomasy</div>
-    </a>
-  </div>
-</section>
-<!-- ABOUT -->
-<section id="o-nas">
-<div aria-label="Zahrada v Brně" class="about-img" role="img">
-<div style="position:relative;z-index:2">
-<img src="images/logo.jpeg" alt="Posečem.cz" class="logo-badge logo-badge-md"/>
-<div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:#fff;line-height:1.2;letter-spacing:-.02em">Každá zahrada<br/>si zaslouží<br/><em style="font-style:italic;color:rgba(255,255,255,.7)">péči</em></div>
-</div>
-<div style="position:absolute;inset:0;background-image:radial-gradient(circle at 20% 80%,rgba(255,255,255,.05) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(255,255,255,.08) 0%,transparent 40%);pointer-events:none"></div>
-</div>
-<div class="about-text">
-<p class="section-label reveal">O nás</p>
-<h2 class="about-h reveal reveal-d1">Zahradníci z <em>Brna,</em><br/>kteří to myslí vážně</h2>
-<p class="about-p reveal reveal-d2">Jsme brněnská parta zahradníků s více než pětiletými zkušenostmi. Nebereme to jako brigádu — bereme to jako řemeslo. Každá zahrada si zaslouží pečlivou práci.</p>
-<p class="about-p reveal reveal-d3">Pracujeme v Brně a okolí do 30 km. Objednávky přijímáme 7 dní v týdnu, výjezd zajišťujeme do 24 hodin.</p>
-<div class="about-checks reveal reveal-d4">
-<div class="check-item"><div class="check-icon">✓</div>Vlastní profesionální technika</div>
-<div class="check-item"><div class="check-icon">✓</div>Platíte až po dokončení práce</div>
-<div class="check-item"><div class="check-icon">✓</div>Nemusíte být doma</div>
-<div class="check-item"><div class="check-icon">✓</div>Bezplatná cenová nabídka</div>
-</div>
+<!-- DLAŽDICE SLUŽEB přes spodní část hero -->
+<div class="hero-tiles">
+  <a href="#kontakt" class="hero-tile">
+    <div class="hero-tile-img"><img src="images/8.png" alt="Sekání trávy"/></div>
+    <div class="hero-tile-label">Sekání trávy</div>
+  </a>
+  <a href="#kontakt" class="hero-tile">
+    <div class="hero-tile-img"><img src="images/3.jpeg" alt="Zavlažování"/></div>
+    <div class="hero-tile-label">Zavlažování</div>
+  </a>
+  <a href="#kontakt" class="hero-tile">
+    <div class="hero-tile-img"><img src="images/11.jpeg" alt="Křovinořez"/></div>
+    <div class="hero-tile-label">Křovinořez</div>
+  </a>
+  <a href="#kontakt" class="hero-tile">
+    <div class="hero-tile-img"><img src="images/12.jpg" alt="Úprava okrajů"/></div>
+    <div class="hero-tile-label">Úprava okrajů</div>
+  </a>
+  <a href="#kontakt" class="hero-tile">
+    <div class="hero-tile-img"><img src="images/20.jpg" alt="Hrabání listí"/></div>
+    <div class="hero-tile-label">Hrabání listí</div>
+  </a>
+  <a href="#kontakt" class="hero-tile">
+    <div class="hero-tile-img"><img src="images/4.jpeg" alt="Odvoz biomasy"/></div>
+    <div class="hero-tile-label">Odvoz biomasy</div>
+  </a>
 </div>
 </section>
 <!-- PRICING -->
