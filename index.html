@@ -29,6 +29,66 @@ body{font-family:var(--sans);background:var(--cream);color:var(--charcoal);overf
 ::-webkit-scrollbar-thumb{background:var(--green)}
 img{display:block;max-width:100%}
 
+/* TOP GRID — grassandgarden styl */
+.top-grid-section{
+  background:var(--charcoal);
+  padding:0;
+}
+.top-grid-wrap{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:3px;
+}
+.top-tile{
+  position:relative;
+  display:block;
+  overflow:hidden;
+  aspect-ratio:4/3;
+  text-decoration:none;
+  background:var(--charcoal);
+}
+.top-tile-img{
+  position:absolute;inset:0;
+  transition:transform .5s cubic-bezier(.22,1,.36,1);
+}
+.top-tile:hover .top-tile-img{transform:scale(1.07)}
+.top-tile-img img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+  transition:opacity .3s;
+}
+.top-tile::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.15) 50%, transparent 100%);
+  z-index:1;
+  transition:opacity .3s;
+}
+.top-tile:hover::after{opacity:.85}
+.top-tile-label{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  padding:18px 20px;
+  font-family:var(--serif);
+  font-size:clamp(1rem,1.8vw,1.3rem);
+  font-weight:700;
+  color:#fff;
+  letter-spacing:-.01em;
+  z-index:2;
+  transition:padding .3s cubic-bezier(.22,1,.36,1);
+}
+.top-tile:hover .top-tile-label{padding-bottom:26px}
+@media(max-width:760px){
+  .top-grid-wrap{grid-template-columns:repeat(2,1fr)}
+  .top-tile{aspect-ratio:3/2}
+}
+@media(max-width:480px){
+  .top-grid-wrap{grid-template-columns:repeat(2,1fr)}
+  .top-tile{aspect-ratio:1/1}
+  .top-tile-label{font-size:.95rem;padding:14px 14px}
+}
+
 /* REVEAL */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.6s cubic-bezier(.22,1,.36,1),transform 0.6s cubic-bezier(.22,1,.36,1)}
 .reveal.on{opacity:1;transform:none}
@@ -631,12 +691,47 @@ footer{
     Rolovat dolů
   </div>
 </section>
-<!-- STATS -->
-<div aria-label="Naše výsledky" class="stats-bar" role="region">
-<div class="stat reveal"><div class="stat-num">850+</div><div class="stat-label">Spokojených zákazníků</div></div>
-<div class="stat reveal reveal-d1"><div class="stat-num">24h</div><div class="stat-label">Výjezd do</div></div>
-<div class="stat reveal reveal-d2"><div class="stat-num">5+</div><div class="stat-label">Let zkušeností</div></div>
-</div>
+<!-- GRID SLUŽBY — grassandgarden styl -->
+<section class="top-grid-section" id="top-sluzby">
+  <div class="top-grid-wrap">
+    <a href="#sluzby" class="top-tile">
+      <div class="top-tile-img">
+        <img src="images/8.png" alt="Sekání trávy"/>
+      </div>
+      <div class="top-tile-label">Sekání trávy</div>
+    </a>
+    <a href="#sluzby" class="top-tile">
+      <div class="top-tile-img">
+        <img src="images/3.jpeg" alt="Zavlažování"/>
+      </div>
+      <div class="top-tile-label">Zavlažování</div>
+    </a>
+    <a href="#sluzby" class="top-tile">
+      <div class="top-tile-img">
+        <img src="images/11.jpeg" alt="Sekání křovinořezem"/>
+      </div>
+      <div class="top-tile-label">Křovinořez</div>
+    </a>
+    <a href="#sluzby" class="top-tile">
+      <div class="top-tile-img">
+        <img src="images/12.jpg" alt="Úprava okrajů"/>
+      </div>
+      <div class="top-tile-label">Úprava okrajů</div>
+    </a>
+    <a href="#sluzby" class="top-tile">
+      <div class="top-tile-img">
+        <img src="images/20.jpg" alt="Hrabání listí"/>
+      </div>
+      <div class="top-tile-label">Hrabání listí</div>
+    </a>
+    <a href="#sluzby" class="top-tile">
+      <div class="top-tile-img">
+        <img src="images/4.jpeg" alt="Odvoz biomasy"/>
+      </div>
+      <div class="top-tile-label">Odvoz biomasy</div>
+    </a>
+  </div>
+</section>
 <!-- ABOUT -->
 <section id="o-nas">
 <div aria-label="Zahrada v Brně" class="about-img" role="img">
